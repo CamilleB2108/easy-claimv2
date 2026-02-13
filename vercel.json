@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "reclamation.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/reclamation.html" }
+  ]
+}
