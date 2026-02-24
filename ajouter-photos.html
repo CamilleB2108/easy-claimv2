@@ -1341,17 +1341,18 @@
                 });
 
                 if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                    var slot = e.currentTarget;
                     var files = e.dataTransfer.files;
-                    var firstFile = files[0];
-                    if (firstFile.type.match(/^image\//) && getUploadedCount() < MAX_PHOTOS) {
-                        var url = URL.createObjectURL(firstFile);
-                        fillSlot(slot, url);
-                        if (files.length > 1) {
-                            var rest = [];
-                            for (var i = 1; i < files.length; i++) rest.push(files[i]);
-                            addFiles(rest);
-                        }
+                    var imageFiles = [];
+                    for (var i = 0; i < files.length; i++) {
+                        if (files[i].type && files[i].type.match(/^image\//)) imageFiles.push(files[i]);
+                    }
+                    if (imageFiles.length === 0) return;
+                    if (getUploadedCount() >= MAX_PHOTOS) return;
+                    if (imageFiles.length === 1) {
+                        var targetSlot = e.currentTarget;
+                        fillSlot(targetSlot, URL.createObjectURL(imageFiles[0]));
+                    } else {
+                        addFiles(files);
                     }
                     updateSendButton();
                     return;
@@ -1428,16 +1429,33 @@
                 btn.disabled = !hasPhotos;
             }
 
+            function getSlotAt(index) {
+                var fixedCount = 5;
+                if (index < fixedCount) {
+                    var fixed = document.querySelectorAll('.photo-slot');
+                    return index < fixed.length ? fixed[index] : null;
+                }
+                var j = index - fixedCount;
+                return j < extraContainer.children.length ? extraContainer.children[j] : getOrCreateSlot(index);
+            }
+
+            function slotHasPhoto(slot) {
+                return slot && slot.querySelector('.vignette-photo') !== null;
+            }
+
             function addFiles(files) {
                 if (!files || files.length === 0) return;
-                var count = getUploadedCount();
-                for (var i = 0; i < files.length && count < MAX_PHOTOS; i++) {
-                    var file = files[i];
-                    if (!file.type.match(/^image\//)) continue;
-                    var url = URL.createObjectURL(file);
-                    var slot = getOrCreateSlot(count);
-                    fillSlot(slot, url);
-                    count++;
+                var imageFiles = [];
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].type && files[i].type.match(/^image\//)) imageFiles.push(files[i]);
+                }
+                if (imageFiles.length === 0) return;
+                var fileIdx = 0;
+                for (var slotIdx = 0; slotIdx < MAX_PHOTOS && fileIdx < imageFiles.length; slotIdx++) {
+                    var slot = getSlotAt(slotIdx);
+                    if (slotHasPhoto(slot)) continue;
+                    fillSlot(slot, URL.createObjectURL(imageFiles[fileIdx]));
+                    fileIdx++;
                 }
                 updateSendButton();
             }
