@@ -405,6 +405,10 @@
             position: relative;
         }
 
+        .photo-slot:not(.has-uploaded-photo) {
+            cursor: pointer;
+        }
+
         .upload-box.dashed::before {
             content: '';
             position: absolute;
@@ -447,8 +451,8 @@
         }
 
         .photo-type-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin-bottom: 8px;
         }
 
@@ -573,6 +577,7 @@
             flex-direction: column;
             gap: 15px;
             align-items: flex-start;
+            position: relative;
         }
 
         .main-upload-top {
@@ -585,17 +590,23 @@
 
 
         .form-actions {
-            display: contents;
+            display: grid;
+            grid-template-columns: 187.33px 187.33px 187.33px;
+            gap: 15px;
+            align-items: center;
+            padding-top: 30px;
+            grid-column: 1 / -1;
+            max-width: calc(187.33px * 3 + 15px * 2);
         }
 
         .form-actions-left {
+            padding-top: 0;
             grid-column: 1;
-            padding-top: 30px;
         }
 
         .form-actions-right {
-            grid-column: 2;
-            padding-top: 30px;
+            padding-top: 0;
+            grid-column: 3;
             display: flex;
             justify-content: flex-end;
         }
@@ -647,6 +658,203 @@
         .btn-send::after {
             content: '→';
             font-size: 16px;
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 15px;
+                height: 50px;
+            }
+
+            .navbar-menu {
+                display: none;
+            }
+
+            .navbar-right {
+                gap: 10px;
+            }
+
+            .navbar-icons {
+                gap: 10px;
+            }
+
+            .navbar-icon {
+                width: 14px;
+                height: 14px;
+            }
+
+            .club-pro {
+                font-size: 10px;
+            }
+
+            .btn-start {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+
+            .navbar-logo .logo-plum {
+                font-size: 16px;
+            }
+
+            .navbar-logo .logo-living {
+                font-size: 10px;
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+                transition: width 0.3s;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px 15px;
+                margin-top: 50px;
+            }
+
+            .form-container {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .form-title {
+                font-size: 22px;
+            }
+
+            .form-instruction {
+                font-size: 11px;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+
+            .photos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .main-upload-top {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .upload-box {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+                min-height: 0;
+            }
+
+            .upload-box.main {
+                width: 100%;
+            }
+
+            .photos-container {
+                margin-bottom: 10px;
+            }
+
+            .add-more-btn {
+                width: 50px;
+                height: 50px;
+                margin-top: 10px;
+            }
+
+            .upload-label {
+                font-size: 10px;
+            }
+
+            .upload-subtext {
+                font-size: 9px;
+            }
+
+            .photo-type-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .photo-type-label {
+                font-size: 10px;
+            }
+
+            .conditions-box {
+                max-width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+                padding: 15px;
+            }
+
+            .conditions-title {
+                font-size: 11px;
+                margin-bottom: 12px;
+            }
+
+            .conditions-list li {
+                font-size: 10px;
+                margin-bottom: 8px;
+            }
+
+            .form-actions {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid #f0f0f0;
+            }
+
+            .form-actions-left,
+            .form-actions-right {
+                grid-column: 1;
+                padding-top: 0;
+            }
+
+            .form-actions-left {
+                flex: 1;
+            }
+
+            .form-actions-right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .btn-back,
+            .btn-send {
+                flex: 1;
+                max-width: none;
+                justify-content: center;
+            }
+        }
+
+        /* Responsive - Très petits écrans */
+        @media (max-width: 480px) {
+            .photos-grid {
+                gap: 8px;
+            }
+
+            .main-upload-top {
+                gap: 8px;
+            }
+
+            .upload-label {
+                font-size: 10px;
+            }
+
+            .upload-subtext {
+                font-size: 9px;
+            }
+
+            .photo-type-label {
+                font-size: 10px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
         }
 
         .form-actions-right {
@@ -732,7 +940,7 @@
         }
 
         .upload-box.main.drag-over .upload-label::after {
-            content: 'GLISSER ICI';
+            content: 'GLISSER';
             font-size: 11px;
             font-weight: 500;
             color: #2c2c2c;
@@ -755,6 +963,62 @@
         .upload-box.drag-over-photo {
             outline: 2px solid #2c2c2c;
             outline-offset: 2px;
+        }
+
+        .upload-box.dragging-source {
+            opacity: 0.35;
+        }
+
+        /* Zone globale de dépôt de fichiers */
+        .main-upload-wrapper.drag-over-zone {
+            border-radius: 12px;
+        }
+
+        .zone-drop-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            border: 1px solid #2c2c2c;
+            border-radius: 12px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            z-index: 10;
+            pointer-events: none;
+            box-sizing: border-box;
+        }
+
+        .main-upload-wrapper.drag-over-zone .zone-drop-overlay {
+            display: flex;
+        }
+
+        .zone-drop-overlay-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .zone-drop-overlay-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #2c2c2c;
+            stroke-width: 1.5;
+        }
+
+        .zone-drop-overlay-text {
+            font-family: 'Cera Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c2c2c;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Vignette cible lors du dépôt de fichiers - pas de contour */
+        .upload-box.drag-over-file {
+            /* Pas d’effet visuel pour éviter le contour pointillé */
         }
     </style>
 </head>
@@ -875,7 +1139,16 @@
 
             <div class="content-wrapper">
                 <div class="photos-section">
-                    <div class="main-upload-wrapper">
+                    <div class="main-upload-wrapper" id="photos-drop-zone">
+                        <div class="zone-drop-overlay" aria-hidden="true">
+                            <div class="zone-drop-overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
+                            </div>
+                            <span class="zone-drop-overlay-text">Déposez vos images ici.</span>
+                        </div>
                         <div class="main-upload-top">
                             <div class="upload-box main" id="upload-trigger" role="button" tabindex="0" title="Cliquez pour ajouter des photos">
                                 <div class="upload-icon">
@@ -884,7 +1157,7 @@
                                         <circle cx="12" cy="13" r="4"></circle>
                                     </svg>
                                 </div>
-                                <div class="upload-label">AJOUTER / GLISSER ICI</div>
+                                <div class="upload-label">AJOUTER / GLISSER</div>
                                 <div class="upload-subtext">Maximum 10 photos.<br>Format jpg, png ou pdf</div>
                             </div>
 
@@ -931,7 +1204,6 @@
                         <div class="photos-grid" id="extra-vignettes-container"></div>
                     </div>
 
-                    <div class="add-more-btn" id="add-more-btn">+</div>
                 </div>
 
                 <div class="conditions-box">
@@ -964,10 +1236,11 @@
             var MAX_PHOTOS = 10;
             var input = document.getElementById('photo-input');
             var trigger = document.getElementById('upload-trigger');
+            var photosDropZone = document.getElementById('photos-drop-zone');
             var photoSlots = document.querySelectorAll('.photo-slot');
             var extraContainer = document.getElementById('extra-vignettes-container');
-            var addMoreBtn = document.getElementById('add-more-btn');
             var draggedSlot = null;
+            var targetSlotForClick = null;
 
             if (!input || !trigger || !extraContainer) return;
 
@@ -1001,6 +1274,7 @@
                     slot.classList.remove('has-uploaded-photo');
                     slot.draggable = false;
                     slot.removeEventListener('dragstart', handlePhotoDragStart);
+                    slot.removeEventListener('dragend', handlePhotoDragEnd);
                     slot.innerHTML = defaultSlotContent[idx];
                 } else {
                     slot.parentNode.removeChild(slot);
@@ -1013,13 +1287,34 @@
                     return;
                 }
                 draggedSlot = e.currentTarget;
+                e.currentTarget.classList.add('dragging-source');
                 e.dataTransfer.setData('text/plain', 'photo');
                 e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setDragImage(e.currentTarget, 0, 0);
+                var img = e.currentTarget.querySelector('.vignette-photo');
+                if (img) {
+                    var w = img.offsetWidth || 80;
+                    var h = img.offsetHeight || 80;
+                    e.dataTransfer.setDragImage(img, w / 2, h / 2);
+                } else {
+                    e.dataTransfer.setDragImage(e.currentTarget, 0, 0);
+                }
+            }
+
+            function handlePhotoDragEnd(e) {
+                e.currentTarget.classList.remove('dragging-source');
+                if (draggedSlot === e.currentTarget) draggedSlot = null;
             }
 
             function handlePhotoDragOver(e) {
-                if (e.dataTransfer.types.indexOf('Files') !== -1) return;
+                if (e.dataTransfer.types.indexOf('Files') !== -1) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy';
+                    var slot = e.target.closest('.photo-slot, #extra-vignettes-container .upload-box');
+                    if (slot && getUploadedCount() < MAX_PHOTOS) {
+                        slot.classList.add('drag-over-file');
+                    }
+                    return;
+                }
                 e.preventDefault();
                 e.dataTransfer.dropEffect = 'move';
                 var slot = e.target.closest('.photo-slot, #extra-vignettes-container .upload-box');
@@ -1032,13 +1327,37 @@
                 var slot = e.target.closest('.photo-slot, #extra-vignettes-container .upload-box');
                 if (slot && !slot.contains(e.relatedTarget)) {
                     slot.classList.remove('drag-over-photo');
+                    slot.classList.remove('drag-over-file');
                 }
             }
 
             function handlePhotoDrop(e) {
                 e.preventDefault();
-                document.querySelectorAll('.drag-over-photo').forEach(function (el) { el.classList.remove('drag-over-photo'); });
-                var dropTarget = e.target.closest('.photo-slot, #extra-vignettes-container .upload-box');
+                e.stopPropagation();
+                if (photosDropZone) photosDropZone.classList.remove('drag-over-zone');
+                document.querySelectorAll('.drag-over-photo, .drag-over-file').forEach(function (el) {
+                    el.classList.remove('drag-over-photo');
+                    el.classList.remove('drag-over-file');
+                });
+
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    var slot = e.currentTarget;
+                    var files = e.dataTransfer.files;
+                    var firstFile = files[0];
+                    if (firstFile.type.match(/^image\//) && getUploadedCount() < MAX_PHOTOS) {
+                        var url = URL.createObjectURL(firstFile);
+                        fillSlot(slot, url);
+                        if (files.length > 1) {
+                            var rest = [];
+                            for (var i = 1; i < files.length; i++) rest.push(files[i]);
+                            addFiles(rest);
+                        }
+                    }
+                    updateSendButton();
+                    return;
+                }
+
+                var dropTarget = e.currentTarget;
                 if (!dropTarget || !draggedSlot || dropTarget === draggedSlot) {
                     draggedSlot = null;
                     return;
@@ -1055,8 +1374,8 @@
                         clearSlot(draggedSlot);
                     }
                 }
+                if (draggedSlot) draggedSlot.classList.remove('dragging-source');
                 draggedSlot = null;
-                updateAddMoreVisibility();
                 updateSendButton();
             }
 
@@ -1074,12 +1393,17 @@
                     '<img src="images/Delete.png" alt="">' +
                     '</button>';
                 slot.addEventListener('dragstart', handlePhotoDragStart);
-                if (slot.parentNode === extraContainer) setupDropTarget(slot);
+                slot.addEventListener('dragend', handlePhotoDragEnd);
+                if (slot.parentNode === extraContainer) {
+                    setupDropTarget(slot);
+                    slot.addEventListener('click', handleVignetteClick);
+                }
                 slot.querySelector('.vignette-delete-btn').addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     slot.draggable = false;
                     slot.removeEventListener('dragstart', handlePhotoDragStart);
+                    slot.removeEventListener('dragend', handlePhotoDragEnd);
                     var idx = Array.prototype.indexOf.call(photoSlots, slot);
                     if (idx !== -1 && idx < defaultSlotContent.length) {
                         slot.classList.remove('has-uploaded-photo');
@@ -1088,16 +1412,14 @@
                         slot.parentNode.removeChild(slot);
                     }
                     try { URL.revokeObjectURL(url); } catch (err) {}
-                    updateAddMoreVisibility();
+                    // updateAddMoreVisibility(); // Fonction supprimée
                     updateSendButton();
                 });
             }
 
-            function updateAddMoreVisibility() {
-                if (addMoreBtn) {
-                    addMoreBtn.style.display = getUploadedCount() >= MAX_PHOTOS ? 'none' : '';
-                }
-            }
+            // function updateAddMoreVisibility() {
+            //     // Fonction supprimée - le bouton "+" n'existe plus
+            // }
 
             function updateSendButton() {
                 var btn = document.getElementById('btn-send');
@@ -1117,11 +1439,20 @@
                     fillSlot(slot, url);
                     count++;
                 }
-                updateAddMoreVisibility();
                 updateSendButton();
             }
 
+            function handleVignetteClick(e) {
+                if (e.target.closest('.vignette-delete-btn')) return;
+                if (getUploadedCount() >= MAX_PHOTOS) return;
+                targetSlotForClick = e.currentTarget;
+                input.click();
+            }
+
             [].forEach.call(photoSlots, setupDropTarget);
+            [].forEach.call(photoSlots, function (slot) {
+                slot.addEventListener('click', handleVignetteClick);
+            });
             updateSendButton();
 
             trigger.addEventListener('click', function () {
@@ -1163,15 +1494,63 @@
                 e.preventDefault();
                 e.stopPropagation();
                 trigger.classList.remove('drag-over');
+                if (photosDropZone) photosDropZone.classList.remove('drag-over-zone');
                 if (getUploadedCount() >= MAX_PHOTOS) return;
                 var files = e.dataTransfer.files;
                 if (files && files.length) addFiles(files);
             });
 
             input.addEventListener('change', function () {
-                addFiles(input.files);
+                var files = input.files;
                 input.value = '';
+                if (!files || files.length === 0) return;
+                if (targetSlotForClick) {
+                    var firstFile = null;
+                    var rest = [];
+                    for (var i = 0; i < files.length; i++) {
+                        if (files[i].type.match(/^image\//)) {
+                            if (firstFile === null) firstFile = files[i];
+                            else rest.push(files[i]);
+                        }
+                    }
+                    if (firstFile) {
+                        fillSlot(targetSlotForClick, URL.createObjectURL(firstFile));
+                        if (rest.length) addFiles(rest);
+                    }
+                    targetSlotForClick = null;
+                } else {
+                    addFiles(files);
+                }
+                updateSendButton();
             });
+
+            if (photosDropZone) {
+                photosDropZone.addEventListener('dragover', function (e) {
+                    if (e.dataTransfer.types.indexOf('Files') !== -1 && getUploadedCount() < MAX_PHOTOS) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'copy';
+                        photosDropZone.classList.add('drag-over-zone');
+                    }
+                });
+                photosDropZone.addEventListener('dragenter', function (e) {
+                    if (e.dataTransfer.types.indexOf('Files') !== -1 && getUploadedCount() < MAX_PHOTOS) {
+                        photosDropZone.classList.add('drag-over-zone');
+                    }
+                });
+                photosDropZone.addEventListener('dragleave', function (e) {
+                    if (!photosDropZone.contains(e.relatedTarget)) {
+                        photosDropZone.classList.remove('drag-over-zone');
+                    }
+                });
+                photosDropZone.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    photosDropZone.classList.remove('drag-over-zone');
+                    if (e.target.closest('#upload-trigger') || e.target.closest('.photo-slot') || e.target.closest('#extra-vignettes-container .upload-box')) return;
+                    if (getUploadedCount() >= MAX_PHOTOS) return;
+                    var files = e.dataTransfer.files;
+                    if (files && files.length) addFiles(files);
+                });
+            }
         })();
     </script>
 </body>

@@ -14,14 +14,14 @@
 
         @font-face {
             font-family: 'Blacklist';
-            src: url('../FONTS/Blacklist Complete Family/Great Studio - Blacklist-Bold.otf') format('opentype');
+            src: url('FONTS/Blacklist Complete Family/Great Studio - Blacklist-Bold.otf') format('opentype');
             font-weight: bold;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Blacklist';
-            src: url('../FONTS/Blacklist Complete Family/Great Studio - Blacklist-Medium.otf') format('opentype');
+            src: url('FONTS/Blacklist Complete Family/Great Studio - Blacklist-Medium.otf') format('opentype');
             font-weight: 500;
             font-style: normal;
         }
@@ -35,21 +35,21 @@
 
         @font-face {
             font-family: 'Cera Pro';
-            src: url('../FONTS/cera pro sv/Cera Pro Bold.otf') format('opentype');
+            src: url('FONTS/cera pro sv/Cera Pro Bold.otf') format('opentype');
             font-weight: bold;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Cera Pro';
-            src: url('../FONTS/cera pro sv/Cera Pro Medium.otf') format('opentype');
+            src: url('FONTS/cera pro sv/Cera Pro Medium.otf') format('opentype');
             font-weight: 500;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Cera Pro';
-            src: url('../FONTS/cera pro sv/Cera Pro Light.otf') format('opentype');
+            src: url('FONTS/cera pro sv/Cera Pro Light.otf') format('opentype');
             font-weight: 300;
             font-style: normal;
         }
@@ -601,6 +601,112 @@
             content: '→';
             font-size: 16px;
         }
+
+        /* Responsive - Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 15px;
+                height: 50px;
+            }
+
+            .navbar-menu {
+                display: none;
+            }
+
+            .navbar-right {
+                gap: 10px;
+            }
+
+            .navbar-icons {
+                gap: 10px;
+            }
+
+            .navbar-icon {
+                width: 14px;
+                height: 14px;
+            }
+
+            .club-pro {
+                font-size: 10px;
+            }
+
+            .btn-start {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+
+            .navbar-logo .logo-plum {
+                font-size: 16px;
+            }
+
+            .navbar-logo .logo-living {
+                font-size: 10px;
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+                transition: width 0.3s;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px 15px;
+                margin-top: 50px;
+            }
+
+            .form-container {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .form-title {
+                font-size: 22px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .product-item {
+                padding: 10px 0;
+            }
+
+            .form-actions {
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+
+            .btn-continue {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Responsive - Très petits écrans */
+        @media (max-width: 480px) {
+            .form-title {
+                font-size: 20px;
+            }
+
+            .form-label {
+                font-size: 9px;
+            }
+
+            .form-select,
+            .form-textarea {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+
+            .product-name {
+                font-size: 12px;
+            }
+
+            .product-description {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1123,15 +1229,21 @@
 
             // Gérer le bouton CONTINUER
             const btnContinue = document.getElementById('btn-continue');
-            btnContinue.addEventListener('click', function() {
-                saveFormState(); // Sauvegarder avant de naviguer
-                const selectedMotif = motifSelect.value;
-                // Rediriger vers la page ajouter-photos uniquement si le motif est "L'un de mes produits est endommagé"
-                if (selectedMotif === 'produit-endommage') {
-                    window.location.href = 'ajouter-photos.html';
-                }
-                // Pour les autres motifs, ne rien faire pour le moment
-            });
+            if (btnContinue) {
+                btnContinue.addEventListener('click', function() {
+                    if (btnContinue.disabled) {
+                        return; // Ne rien faire si le bouton est désactivé
+                    }
+                    
+                    saveFormState(); // Sauvegarder avant de naviguer
+                    const selectedMotif = motifSelect.value;
+                    // Rediriger vers la page ajouter-photos uniquement si le motif est "L'un de mes produits est endommagé"
+                    if (selectedMotif === 'produit-endommage') {
+                        window.location.href = 'ajouter-photos.html';
+                    }
+                    // Pour les autres motifs, ne rien faire pour le moment
+                });
+            }
         });
     </script>
 </body>
